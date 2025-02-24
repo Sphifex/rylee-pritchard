@@ -18,42 +18,37 @@ export class HomePage {
 
     render() {
         this.app.innerHTML = `
-            <section id='hero' class="hero">
-                <h1>Rylee Pritchard</h1>
-                <div class="slider-container">
-                    <div class="slider">
-                        <div class="user-img-wrap">
-                            <div class="user-img">
-                            <img src="./images/userpic.jpg" />
+            <section id="hero" class="hero">
+                <div class="hero-overlay">
+                    <h1>Rylee Pritchard</h1>
+                    <h2>This Is My Portfolio . . .</h2>
+                    <h3> this protfolio will be updated with every new project
+                    i take on !!!</h3>
+                    <div class="slider-container">
+                        <div class="slider">
+                            <div class="user-img-wrap">
+                                <div class="user-img">
+                                    <img src="./images/userpic.jpg" alt="User Picture"/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="user-meta">
-                          <div class"username">
-                          Rylee Pritchard
-                          </div>
-                          <div class="user-location">
-                          Ruskin FL, USA
-                          </div>
-                          <div class="user-profiles">
-
-
-                          <a href="https://www.youtube.com/@sphifex5678 " target="_blank">
-                          <ion-icon name="logo-youtube"></ion-icon>
-                          </a>
-
-                          <a href="https://x.com/sphifex " target"_blank">
-                          <ion-icon name="logo-twitter"></ion-icon>
-                          </a>
- 
-                         <a href="https://www.instagram.com/aka_rylee/reels/" target="_blank">
-                         <ion-icon name="logo-instagram"></ion-icon>
-                         </a>
-                        
-                         <a href=""target"_blank>
-                         <ion-icon name="logo-linkedin"></ion-icon>
-                         </a>
-
-                          </div>
+                            <div class="user-meta">
+                                <div class="username">Rylee Pritchard</div>
+                                <div class="user-location">Ruskin, FL, USA</div>
+                                <div class="user-profiles">
+                                    <a href="https://www.youtube.com/@sphifex5678" target="_blank">
+                                        <ion-icon name="logo-youtube"></ion-icon>
+                                    </a>
+                                    <a href="https://x.com/sphifex" target="_blank">
+                                        <ion-icon name="logo-twitter"></ion-icon>
+                                    </a>
+                                    <a href="https://www.instagram.com/aka_rylee/reels/" target="_blank">
+                                        <ion-icon name="logo-instagram"></ion-icon>
+                                    </a>
+                                    <a href="" target="_blank">
+                                        <ion-icon name="logo-linkedin"></ion-icon>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -62,12 +57,12 @@ export class HomePage {
             <section id="about">
                 <h2>About Me</h2>
                 <p>Hi, I’m Rylee Pritchard, a front-end web developer with a passion 
-                for creating clean, unique, and user-friendly designs. Born and but just 
-                raised in Joplin, MO, as I moved around alot, I discovered my love for 
+                for creating clean, unique, and user-friendly designs. Born and but NOT 
+                raised in Joplin, MO, as I moved around a lot, I discovered my love for 
                 web development in 2022, thanks to my dad, who introduced me to the world 
-                of coding. Since then, I’ve been dedicated to Learning how to, and to 
-                creating websites that not only look
-                 great but also provide an exceptional user experience.</p>
+                of coding. Since then, I’ve been dedicated to learning how to, and to 
+                creating websites that not only look great but also provide an exceptional 
+                user experience.</p>
             </section>
 
             <section id="projects">
@@ -91,7 +86,7 @@ export class HomePage {
             </section>
 
             <section id="contact">
-                <h2>Contact Me</h2>
+                <h2 class="contactme">Contact Me</h2>
                 <form class="contact-form" id="contactForm">
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -117,7 +112,9 @@ export class HomePage {
                 <img src="${project.image}" alt="${project.title}">
                 <h3>${project.title}</h3>
                 <p>${project.description}</p>
-                <a href="/project/${project.id}" data-link>View Details</a>
+                <div class="view-details-container">
+                    <a href="/project/${project.id}" class="view-project" data-link>View Details</a>
+                </div>
             </div>
         `).join('');
     }
@@ -165,7 +162,6 @@ export class HomePage {
 
     async handleContactSubmit(e) {
         e.preventDefault();
-        // Implement email sending logic here
         console.log('Form submitted');
     }
 
@@ -179,9 +175,3 @@ export class HomePage {
         }, 5000);
     }
 }
-
-
-
-
-
-

@@ -95,3 +95,13 @@ export class Router {
         return { params };
     }
 }
+
+const router = async () => {
+    const path = location.pathname;
+    
+    if (path.startsWith('/project/')) {
+        const projectId = path.split('/project/')[1]; // Extract project ID from URL
+        const page = new ProjectPage({ id: projectId });
+        page.mount();
+    }
+};

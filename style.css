@@ -15,12 +15,15 @@
 body {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
-    background: #eee;
+    background-color: #eee;
+    color: black;
     font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* Navbar styles from your CSS */
 .navbar {
+    max-width: none;
     position:static;
     background: var(--primary-bg);
     padding: 10px 20px;
@@ -236,9 +239,12 @@ li a {
 
 
 
+
+
+
 /* Main content styles */
 #app {
-    max-width: 1400px;
+    max-width: none;
     margin: 0 auto;
     padding: 2rem;
 }
@@ -250,17 +256,79 @@ li a {
 }
 
 .hero h1 {
-    font-size: 74px;
+display: inline-block;
+    font-size:10rem;
     background: linear-gradient(45deg, #002bff, #02bff0, #ff00c8);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     transition: all 0.3s ease;
+    word-wrap: break-word;
 }
 
 .hero h1:hover {
     text-shadow: 0 0 20px rgba(51, 255, 0, 0.5);
 }
+
+
+/* sub text foe hero plce */
+
+.hero h2 {
+    text-align: center;
+    color: black;
+    font-size: 3em;
+    letter-spacing: 10px;
+    font-family: monospace;
+    border-right: 5px solid;
+    width: 100%;
+    word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 5s steps(27), 
+    cursor .4s step-end infinite alternate;
+}
+
+/* blinking */
+@keyframes cursor {
+    50% {border-color: transparent;}
+}
+/* typeing */
+@keyframes typing {
+    from {width: 0;}
+}
+
+body.dark-mode .hero h2 {
+    color: white;
+}
+
+/* ✅ Responsive Font Size Adjustments */
+@media (max-width: 1024px) {
+    .hero h1 {
+        font-size: 4rem;
+    }
+    .hero h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3rem; /* Reduce size for tablets */
+    }
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2.5rem; /* Smaller for mobile */
+    }
+    .hero h2 {
+        font-size: 1.2rem;
+    }
+}
+
 
 .about {
 display: flex;
@@ -330,7 +398,7 @@ gap: 1REM ;
 
 /* Skills section */
 
-.skills-container {
+.skill-container {
     border-bottom: 1px solid #000000; 
     margin: 1rem 0;
     margin-bottom: 100px;
@@ -382,7 +450,7 @@ gap: 1REM ;
 }
 
 .slider {
-    width: 300px;
+    width: 100%;
     height: 450px;
     border-radius: 15px;
 background-color: #d0d3d6;
@@ -516,61 +584,71 @@ background: linear-gradient(
 }
 
 .submit-btn {
-    background: var(--primary-bg);
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 8px;
+    position: relative;
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
     font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    text-decoration: none;
+    overflow: hidden;
+    background: white; /* Keep button background solid */
+    color: black;
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+    z-index: 1;
 }
 
-/* contact submit animation */
-.submit-btn:hover{
-    background: #b3b7ba;
-    border-radius: 15px;
-    position: relative;
-    cursor: pointer;
-    z-index: 0;
- }
-
- .submit-btn:hover::after {
+/* ✅ Blurred Animated RGB Border */
+.submit-btn::before {
     content: "";
-    z-index: -1;
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color:#b3b7ba ;
-    left: 0;
-    top: 0;
-    border-radius: 10px;
- }
-.submit-btn:hover::before{
-    content: "";
-    background: linear-gradient(
-        45deg,
-       #ff0000,  #ff00c8, #02bff0, #48ff00, 
-         #00ffd5, #002bff, #ff00c8, #ff0000
-    );
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    background-size: 600%;
-    z-index: -1;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    filter: blur(8px);
-    animation: glowing 20s linear;
-    transition: opacity .3s ease-in-out;
-    border-radius: 10px;
-    opacity: 1;
- }
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #ff0000, #ff00c8, #02bff0, #48ff00, #00ffd5,
+        #002bff, #ff00c8, #ff0000);
+    background-size: 400% 400%;
+    z-index: -2;
+    animation: glowing-border 3s linear infinite;
+    filter: blur(10px); /* ✅ Adds a soft glow effect */
+}
 
- @keyframes glowing {
-    0% {background-position: 0 0;}
-    50% {background-position: 400% 0;}
-    100% {background-position: 0 0;}
- }
+/* ✅ Inner Layer to Keep Button Background White */
+.submit-btn::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: white; /* Keep button background */
+    border-radius: 6px;
+    z-index: -1;
+}
+
+/* ✅ Smooth RGB Animation */
+@keyframes glowing-border {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+
+/* ✅ Button Hover Effect */
+.submit-btn:hover {
+    transform: scale(1.05);
+}
+
+/* ✅ Active (Click) Effect */
+.submit-btn:active {
+    transform: scale(0.98);
+}
+
+
+
 
  hr {
     border: none;
@@ -581,3 +659,389 @@ background: linear-gradient(
     margin-right: auto;
  }
 
+
+ .view-details-container {
+    display: flex;
+    justify-content: center; /* Center the button */
+    margin-top: 10px;
+}
+
+.view-project {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #ff0000,  #ff00c8, #02bff0, #48ff00, #00ffd5,
+    #002bff, #ff00c8, #ff0000);
+    background-size: 400% 400%;
+    color: white;
+    transition: transform 0.2s;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+    animation: glowing 5s linear infinite;
+}
+
+.view-project:hover {
+    transform: scale(1.05);
+}
+
+.view-project:active {
+    transform: scale(0.98);
+}
+
+@keyframes glowing {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+
+/* Default Light Mode */
+body {
+    background-color: #eee;
+    color: rgb(0, 0, 0);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #121212;
+    color: rgb(255, 255, 255);
+}
+
+/* Modify Navbar */
+.navbar {
+    background-color: #b3b7ba;
+    transition: background-color 0.3s;
+}
+
+body.dark-mode .navbar {
+    background-color: #1e1e1e;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+body.dark-mode .theme-toggle {
+    color: #b3b7ba
+}
+
+/* Project Cards */
+.card {
+    background-color: #d0d3d6;
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+
+body.dark-mode .card {
+    background-color: #232323;
+    color: rgb(255, 255, 255);
+}
+
+
+
+/* Default Light Mode (Buttons) */
+button, .view-project {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #ff0000, #ff00c8, #02bff0, #48ff00, #00ffd5,
+    #002bff, #ff00c8, #ff0000);
+    background-size: 400% 400%;
+    color: rgb(66, 66, 66);
+    transition: transform 0.2s, background-color 0.3s, color 0.3s;
+    box-shadow: 0px 4px 15px rgb(109, 109, 109); /* ✅ Added missing semicolon */
+    animation: glowing 5s linear infinite; /* ✅ Fixed animation property */
+}
+
+/* RGB Glowing Animation */
+@keyframes glowing {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; } 
+}
+
+button:hover, .view-project:hover {
+    transform: scale(1.05);
+}
+
+button:active, .view-project:active {
+    transform: scale(0.98);
+}
+
+/* Dark Mode Buttons */
+body.dark-mode button, 
+body.dark-mode .view-project{
+    background: linear-gradient(90deg, #6200ea, #3700b3, #6200ea);
+    box-shadow: 0px 4px 15px rgba(98, 0, 234, 0.5);
+}
+
+body.dark-mode button:hover, 
+body.dark-mode .view-project:hover, 
+body.dark-mode {
+    transform: scale(1.05);
+}
+
+body.dark-mode button:active, 
+body.dark-mode .view-project:active, 
+body.dark-mode {
+    transform: scale(0.98);
+}
+
+/* Dark Mode Theme Toggle Button */
+.theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+body.dark-mode .theme-toggle {
+    color: rgb(255, 255, 255);
+}
+
+/* Animation for Gradient Effect */
+@keyframes glowing {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+
+
+
+/* Default Light Mode Navbar Links */
+.nav-links li a {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: black;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+/* Dark Mode Navbar */
+body.dark-mode .navbar {
+    background-color: #1e1e1e;
+}
+
+/* Dark Mode Navbar Links */
+body.dark-mode .nav-links li a {
+    color: rgb(255, 255, 255);
+}
+
+body.dark-mode .submit-btn::after {
+    background: #6200ea; /* Dark background inside the border */
+}
+
+body.dark-mode .submit-btn {
+    color: white;
+
+}body.dark-mode .submit-btn::before {
+    filter: blur(12px); /* Slightly stronger blur in Dark Mode */
+}
+
+body.dark-mode .submit-btn:hover {
+    transform: scale(1.05);
+}
+
+/* ✅ Dark Mode Contact Card */
+body.dark-mode .contact-form {
+    background: #1e1e1e; /* Dark Background */
+    color: white;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* ✅ Contact Card Border in Dark Mode */
+body.dark-mode .contact-form {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ✅ Ensure Form Inputs & Labels Change in Dark Mode */
+body.dark-mode .contact-form input,
+body.dark-mode .contact-form textarea {
+    background: #554f5c; /* Darker Inputs */
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+body.dark-mode .contact-form label {
+    color: white;
+}
+
+/* ✅ Hover Effect for Dark Mode Contact Form */
+body.dark-mode .contact-form:hover {
+    background: #f10000;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+
+/* ✅ Default Light Mode */
+.slider {
+    width: 300px;
+    height: 450px;
+    border-radius: 15px;
+    background-color: #d0d3d6; /* Light Mode Background */
+    box-shadow: 0 30px 30px 5px #b1b2b6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    transition: background 0.3s, box-shadow 0.3s;
+    color: black
+}
+
+/* ✅ Dark Mode Profile Card */
+body.dark-mode .slider {
+    background: #1e1e1e; /* Dark Background */
+    color: white;
+    box-shadow: 0 30px 30px 5px rgba(255, 255, 255, 0.2);
+}
+
+/* ✅ Border & Hover Effect for Dark Mode */
+body.dark-mode .slider {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+body.dark-mode .slider:hover {
+    background: #292929;
+    box-shadow: 0 30px 30px 5px rgba(255, 255, 255, 0.3);
+}
+
+/* ✅ Default Light Mode Icons */
+.slider ion-icon,
+.slider .profile-icon {
+    color: black; /* Default color */
+    transition: color 0.3s ease;
+}
+
+/* ✅ Dark Mode - Change Icons to White */
+body.dark-mode .slider ion-icon,
+body.dark-mode .slider .profile-icon {
+    color: white; /* Change icon color in Dark Mode */
+}
+
+/* ✅ Dark Mode - Icon Hover Effect */
+body.dark-mode .slider ion-icon:hover,
+body.dark-mode .slider .profile-icon:hover {
+    color: #ff00dd;
+}
+
+
+/* ✅ Default Light Mode - About & Skills Section */
+#about,
+.skills-container {
+    color: black; /* ✅ Ensure text is black in Light Mode */
+    transition: color 0.3s ease;
+}
+
+/* ✅ Dark Mode - About & Skills Section */
+body.dark-mode #about,
+body.dark-mode .skills-container {
+    color: white; /* ✅ Change text color to white in Dark Mode */
+}
+
+/* ✅ Ensure Headings & Paragraphs in Light Mode Stay Black */
+#about h2,
+#about p,
+.skills-container h2,
+.skills-container p {
+    color: black; /* ✅ Default text color in Light Mode */
+}
+
+/* ✅ Dark Mode Text Fix */
+body.dark-mode #about h2,
+body.dark-mode #about p,
+body.dark-mode .skills-container h2,
+body.dark-mode .skills-container p {
+    color: white; /* ✅ Change text color to white in Dark Mode */
+}
+
+
+/* ✅ Theme Toggle Button */
+.theme-toggle {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 50%;
+    color: black; /* Default color in Light Mode */
+    transition: transform 0.2s, color 0.3s;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* ✅ Glowing Border Effect */
+.theme-toggle::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #0011ff, #9902f0, #ff00c8);
+    background-size: 400% 400%;
+    z-index: -1;
+    animation: glowing-border 3s linear infinite;
+    filter: blur(8px); /* ✅ Soft glow effect */
+}
+
+.contact-form h2 {
+    color: black !important;
+    background: red; /* ✅ Testing */
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Covers entire viewport height */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Dark Mode Buttons */
+body.dark-mode button, 
+body.dark-mode .view-project,
+body.dark-mode .submit-btn {
+    background: linear-gradient(90deg, #6200ea, #3700b3, #6200ea);
+    box-shadow: 0px 4px 15px rgba(98, 0, 234, 0.5);
+    color: white !important;  /* ✅ This ensures white text */
+}
+
+/* Optional: Make text color transition smooth */
+body.dark-mode button:hover, 
+body.dark-mode .view-project:hover, 
+body.dark-mode .submit-btn:hover {
+    transform: scale(1.05);
+    color: white !important; /* ✅ Keep text white on hover */
+}
