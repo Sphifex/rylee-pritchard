@@ -22,8 +22,7 @@ export class HomePage {
                 <div class="hero-overlay">
                     <h1>Rylee Pritchard</h1>
                     <h2>This Is My Portfolio . . .</h2>
-                    <h3> this protfolio will be updated with every new project
-                    i take on !!!</h3>
+                    <h3>This portfolio will be updated with every new project I take on !!!</h3>
                     <div class="slider-container">
                         <div class="slider">
                             <div class="user-img-wrap">
@@ -132,7 +131,6 @@ export class HomePage {
     }
 
     setupEventListeners() {
-        // Project filters
         const filterBtns = document.querySelectorAll('.filter-btn');
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -148,21 +146,32 @@ export class HomePage {
         contactForm.addEventListener('submit', this.handleContactSubmit.bind(this));
     }
 
-    filterProjects(filter) {
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            const categories = JSON.parse(card.dataset.categories);
-            if (filter === 'all' || categories.includes(filter)) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
-
     async handleContactSubmit(e) {
-        e.preventDefault();
-        console.log('Form submitted');
+        e.preventDefault(); // Prevents page reload
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        if (!window.emailjs) {
+            console.error("EmailJS not loaded!");
+            alert("Email service not available. Try again later.");
+            return;
+        }
+
+        emailjs.send("service_6gp7pi2", "template_84zph3i", {
+            name: name,
+            email: email,
+            message: message
+        }, "BgHY8529lRwUIFO1F")
+        .then(response => {
+            alert("Message sent successfully!");
+            document.getElementById("contactForm").reset();
+        })
+        .catch(error => {
+            alert("Failed to send message. Try again.");
+            console.error("EmailJS Error:", error);
+        });
     }
 
     initializeSlider() {
