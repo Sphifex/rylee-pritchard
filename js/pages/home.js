@@ -10,6 +10,9 @@ export class HomePage {
         this.render();
         this.setupEventListeners();
         this.initializeSlider();
+
+        // Initialize EmailJS
+        emailjs.init("TPrKbF887v3FMHe0f"); // Replace with your actual User ID
     }
 
     unmount() {
@@ -43,7 +46,7 @@ export class HomePage {
                                     <a href="https://www.instagram.com/aka_rylee/reels/" target="_blank">
                                         <ion-icon name="logo-instagram"></ion-icon>
                                     </a>
-                                    <a href="" target="_blank">
+                                    <a href="https://www.linkedin.com/in/rylee-pritchard-a43991349/" target="_blank">
                                         <ion-icon name="logo-linkedin"></ion-icon>
                                     </a>
                                 </div>
@@ -108,7 +111,7 @@ export class HomePage {
     renderProjects() {
         return projects.map(project => `
             <div class="card" data-categories='${JSON.stringify(project.categories)}'>
-                <img src="${project.image}" alt="${project.title}">
+               <ion-icon name="folder-outline"></ion-icon> 
                 <h3>${project.title}</h3>
                 <p>${project.description}</p>
                 <div class="view-details-container">
@@ -132,45 +135,28 @@ export class HomePage {
 
     setupEventListeners() {
         const filterBtns = document.querySelectorAll('.filter-btn');
+
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const filter = btn.dataset.filter;
                 this.filterProjects(filter);
+
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
             });
         });
-
-        // Contact form
-        const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', this.handleContactSubmit.bind(this));
     }
 
-    async handleContactSubmit(e) {
-        e.preventDefault(); // Prevents page reload
-
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const message = document.getElementById("message").value;
-
-        if (!window.emailjs) {
-            console.error("EmailJS not loaded!");
-            alert("Email service not available. Try again later.");
-            return;
-        }
-
-        emailjs.send("service_6gp7pi2", "template_84zph3i", {
-            name: name,
-            email: email,
-            message: message
-        }, "BgHY8529lRwUIFO1F")
-        .then(response => {
-            alert("Message sent successfully!");
-            document.getElementById("contactForm").reset();
-        })
-        .catch(error => {
-            alert("Failed to send message. Try again.");
-            console.error("EmailJS Error:", error);
+    filterProjects(filter) {
+        const projectCards = document.querySelectorAll('.card');
+        projectCards.forEach(card => {
+            const categories = JSON.parse(card.getAttribute('data-categories'));
+            
+            if (filter === "all" || categories.includes(filter)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
         });
     }
 

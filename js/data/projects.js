@@ -7,7 +7,6 @@ export const projects = [
         and intuitive experience. Built with modern front-end technologies. Perfect for login, 
         sign-up, or checkout forms, this component is designed to be both visually appealing 
         and fully responsive across all devices.`,
-        image: '<src>omg.png</src>',
         categories: ['html', 'css'],
         code: `<iframe src="https://codesandbox.io/embed/5mw4hz"
                  style="width:100%; height: 500px; border:0; border-radius: 4px; overflow:hidden;"

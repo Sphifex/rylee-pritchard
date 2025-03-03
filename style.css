@@ -256,19 +256,51 @@ li a {
 }
 
 .hero h1 {
-display: inline-block;
-    font-size:10rem;
-    background: linear-gradient(45deg, #002bff, #02bff0, #ff00c8);
+    display: inline-block;
+    font-size: 10rem;
+    background: linear-gradient(45deg, #ff0000, #ff7300, #ffeb00, #48ff00, #00ffd5, #002bff, #ff00c8, #ff0000);
+    background-size: 400% 400%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    animation: rgb-glow 6s linear infinite;
     transition: all 0.3s ease;
     word-wrap: break-word;
 }
 
-.hero h1:hover {
-    text-shadow: 0 0 20px rgba(51, 255, 0, 0.5);
+@keyframes rgb-glow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
+
+.hero h1:hover {
+    -webkit-text-stroke: 2px black;
+}
+
+body.dark-mode .hero h1:hover {
+    -webkit-text-stroke: 2px white;
+}
+
+body.dark-mode .hero h1 {
+    background: linear-gradient(45deg, #00ffff, #0000ff, #8a2be2, #ff00ff, #ff1493, #ff4500, #ff0000);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: dark-rgb-glow 6s linear infinite;
+}
+
+@keyframes dark-rgb-glow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+
+
+
 
 
 /* sub text foe hero plce */
@@ -390,8 +422,9 @@ gap: 1REM ;
     transition: all 0.3s ease;
 }
 
-
-
+body.dark-mode #projects .card ion-icon {
+color: white
+}
 
 
 
@@ -496,6 +529,18 @@ background: linear-gradient(
     to {
         rotate: 360deg;
     }
+}
+
+.slider:hover {
+    animation: shake 2s ease-in-out ;
+}
+
+@keyframes shake {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-2px, 2px); }
+    50% { transform: translate(2px, -2px); }
+    75% { transform: translate(-2px, 2px); }
+    100% { transform: translate(0, 0); }
 }
 
 
@@ -1045,3 +1090,4 @@ body.dark-mode .submit-btn:hover {
     transform: scale(1.05);
     color: white !important; /* ✅ Keep text white on hover */
 }
+
