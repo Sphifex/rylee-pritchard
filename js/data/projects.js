@@ -44,7 +44,7 @@ This art page features a reactive UI with smooth animations and includes a Conta
     },
     {
     id: 4,  // ✅ Unique ID for the third project
-    title: 'A calculator',
+    title: 'A Calculator',
     description: `A web-based calculator I made when learning JavaScript.`,
     image: 'art-gallery.jpg',
     categories: ['html', 'css', 'javascript'],
@@ -57,7 +57,7 @@ This art page features a reactive UI with smooth animations and includes a Conta
 },
 {
 id: 5,  // ✅ Unique ID for the third project
-title: 'product landing page',
+title: 'Product Landing Page',
 description: `This is a product landing page I created based around 
 car parts using real car parts my friend sent me to use!! this page 
 includes a functional navbar, a contact section, a testimonial section, 
